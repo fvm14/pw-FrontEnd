@@ -1,9 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Container, TextField, Button, Typography, alpha } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
   const [nombre, setNombre] = useState("");
   const [apellidos, setApellidos] = useState("");
   const [correo, setCorreo] = useState("");
@@ -22,6 +22,11 @@ const RegisterPage = () => {
 
     if (password !== confirmPassword) {
       setError("Las contraseñas no coinciden");
+      return;
+    }
+
+    if (!correo.endsWith("@aloe.ulima.edu.pe")) {
+      setError("Debes usar un correo institucional");
       return;
     }
 

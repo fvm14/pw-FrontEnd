@@ -15,6 +15,14 @@ const LoginPage = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    // Validaciones de correo y contraseña
+    if (!correo || !password) {
+      setError("Por favor ingresa tu correo y contraseña");
+      setShowAlert(true);
+      return;
+    }
+
     try {
       const response = await fetch("https://peliculasbackendpw.azurewebsites.net/cines/users", {
         method: 'POST',
@@ -29,7 +37,6 @@ const LoginPage = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Almacena la información de inicio de sesión en sessionStorage
         sessionStorage.setItem('isLoggedIn', 'true');
         sessionStorage.setItem('user', JSON.stringify(data));
         navigate('/peliculas');
@@ -51,13 +58,11 @@ const LoginPage = () => {
       }, 10000);
     }
   };
-  
+
   useEffect(() => {
-    // Verifica si el usuario está autenticado al cargar la página
     const isLoggedIn = sessionStorage.getItem('isLoggedIn');
 
     if (isLoggedIn) {
-      // Si está autenticado, redirige a la página de películas
       navigate('/peliculas');
     }
   }, [navigate]);
@@ -171,7 +176,7 @@ const LoginPage = () => {
           <Link
             to="/recover"
             component={Link}
-            style={{color : "orange"}}
+            style={{ color: "orange" }}
             sx={{
               marginTop: 2,
               fontSize: 15,
@@ -180,7 +185,7 @@ const LoginPage = () => {
               textDecoration: 'none',
               textAlign: 'center',
               display: 'block',
-              color: "orange", 
+              color: "orange",
             }}
           >
             Olvidé mi contraseña
