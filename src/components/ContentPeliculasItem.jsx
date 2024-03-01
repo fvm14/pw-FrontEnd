@@ -1,11 +1,11 @@
 
-import { Box} from '@mui/material';
+import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import '@fontsource/roboto'; 
+import '@fontsource/roboto';
 import DetallePelis from './DetallePelis';
 import { useParams } from 'react-router-dom'
 import React, { useState, useEffect } from 'react';
-import {useLocation} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 
 
@@ -16,22 +16,22 @@ const ContentPeliculasItem = () => {
   const [peliculaEspecifica, setPeliculaEspecifica] = useState(null);
   const { path } = useParams();
   const location = useLocation();
-  
 
-const obtenerFunciones = async() => {
-  const response = await fetch(`https://peliculasbackendpw.azurewebsites.net/ver-funciones-pelicula?idpelicula=${location.state.movie.id}`);
-  const data = await response.json();
-  setFuncionesData(data);
 
-}
+  const obtenerFunciones = async () => {
+    const response = await fetch(`https://peliculasbackendpw.azurewebsites.net/cines/ver-funciones-pelicula?idpelicula=${location.state.movie.id}`);
+    const data = await response.json();
+    setFuncionesData(data);
+
+  }
 
   useEffect(() => {
     obtenerFunciones();
     setPeliculaEspecifica(location.state.movie)
   }, []);
 
- 
-  
+
+
 
   return (
     <Box flex={2} sx={{ p: 4 }}>
@@ -47,20 +47,20 @@ const obtenerFunciones = async() => {
           extract={peliculaEspecifica.extract}
           genres={peliculaEspecifica.genres}
           path={peliculaEspecifica.path}
-          funciones = {funcionesData}
+          funciones={funcionesData}
           actores={peliculaEspecifica.cast}
 
 
-          /* salas={peliculaEspecifica.salas.map(sala => {
-            const salaInfo = salasData.find(s => s.name === sala.sala);
-            return { ...sala, ...salaInfo };
-          })}  */
-          
+        /* salas={peliculaEspecifica.salas.map(sala => {
+          const salaInfo = salasData.find(s => s.name === sala.sala);
+          return { ...sala, ...salaInfo };
+        })}  */
+
 
         />
       )}
 
-      
+
     </Box>
   );
 };
