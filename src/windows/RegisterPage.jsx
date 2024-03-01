@@ -26,7 +26,7 @@ const RegisterPage = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/cines/createuser", {
+      const response = await fetch("https://peliculasbackendpw.azurewebsites.net/cines/createuser", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

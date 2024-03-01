@@ -16,7 +16,7 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8000/cines/users", {
+      const response = await fetch("https://peliculasbackendpw.azurewebsites.net/cines/users", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
